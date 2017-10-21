@@ -11,6 +11,7 @@ var jwt = require('jsonwebtoken');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var register = require('./routes/register');
+var profile = require('./routes/profile');
 var config = require('./config/database');
 var User = require('./models/register');
 
@@ -60,7 +61,7 @@ app.post('/authenticate', (req, res, next)=>{
 	User.comparePassword(password, user.password, (err, Match)=>{
 		if(err) throw err;
 		if(Match){
-			var token = jwt.sign({username: user.username, expiresInSeconds:60}, config.secret, {
+			var token = jwt.sign({username: user.username, expiresInSeconds:3600}, config.secret, {
 					// expiresInSeconds: 60
 			});
 			res.json({
@@ -83,6 +84,8 @@ app.post('/authenticate', (req, res, next)=>{
 
 })
 
+
+app.get('/profile', passport.authenticate('jwt', {session:false}), profile.info)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
