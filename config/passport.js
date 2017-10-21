@@ -9,6 +9,7 @@ module.exports = function(passport){
 	opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 	opts.secretOrKey = config.secret;
 	passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+		console.log("hello")
 		console.log(jwt_payload);
     	User.findOne({username: jwt_payload.username}, function(err, user) {
         if (err) {
