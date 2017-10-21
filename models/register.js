@@ -11,23 +11,9 @@ var Schema = mongoose.Schema;
  })
 
 
- // var profileSchema = new Schema({
- // 	name: {type: String, required:true},
- // 	username: {type: String, required:true, unique:true},
- // 	type: {type: String, required:true},
- // 	experience: {type: String, required:true},
- // 	profession: {type: String, required: true},
- // 	city: {type: String},
- 	
- // })
 
 var User = mongoose.model('User', userSchema);
-// var Profile = mongoose.model('Profile', profileSchema);
 
-// module.exports = {
-// 	User: User,
-// 	Profile: Profile
-// };
 
 module.exports = User;
 
@@ -41,4 +27,16 @@ module.exports.registerUser = (newUser, callback)=>{
         newUser.save(callback)
     });
 });
+}
+
+module.exports.findUserByUserName = (username, callback)=>{
+	// if(err) throw err;
+	User.findOne({username: username}, callback);
+}
+
+module.exports.comparePassword = (curPass, actPass, callback)=>{
+	bcrypt.compare(curPass, actPass, (err, res)=>{
+    	if(err) throw err;
+    		callback(null, res);
+	});
 }
