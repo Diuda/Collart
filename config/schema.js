@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt')
 var Schema = mongoose.Schema;
 
  var userSchema = new Schema({
@@ -27,3 +28,13 @@ module.exports = {
 	User: User,
 	Profile: Profile
 };
+
+module.exports.registerUser = (newUser, callback)=>{
+	bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(newUser.password, salt, function(err, hash) {
+    	if(err) throw err;
+        newUser.password = hash;
+        newUser.User.save(callback)
+    });
+});
+}
