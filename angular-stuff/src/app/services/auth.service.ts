@@ -16,4 +16,22 @@ export class AuthService {
   	console.log(user)
   	return this.http.post('http://localhost:3000/register', user, {headers:headers}).map(res=>res.json()); 
   }
+
+  loginUser(user){
+   	var headers = new Headers();
+  	headers.append('Content-Type', 'application/json')
+  	console.log(user)
+  	return this.http.post('http://localhost:3000/authenticate', user, {headers:headers}).map(res=>res.json());  	
+  }
+  storeUserData(token, user){
+    localStorage.setItem('id_token', token);
+    localStorage.setItem('user', JSON.stringify(user.username));
+    this.authToken = token;
+    this.user = user;
+  }
+  removeUserData(){
+    this.authToken = null;
+    this.user = null;
+    localStorage.clear();
+  }
 }
