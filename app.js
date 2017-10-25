@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
+var cors = require('cors')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -16,6 +17,8 @@ var config = require('./config/database');
 var User = require('./models/register');
 
 var app = express();
+
+app.use(cors())
 
 // mongoose.createConnection(config.database, {
 // 	useMongoClient: true,
