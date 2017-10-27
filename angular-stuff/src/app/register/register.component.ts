@@ -38,10 +38,6 @@ export class RegisterComponent implements OnInit {
 
   	};
   	if(!this.ValidateService.validateRegister(user)){
-  // 		let flMsg = new FlashMessageService()
-		// flMsg.message = 'Please Fill all the fields'; // string to be displayed in the notification, if empty flash message wont be dsiplayed
-		// flMsg.isSuccess = true; // defaults to info
-		// flMsg.timeoutInMS = 3000; // defaults to 6000	
 		console.log(123)
   		alert("PLease fill all fields");
   	}
