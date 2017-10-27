@@ -23,6 +23,16 @@ export class AuthService {
   	console.log(user)
   	return this.http.post('http://localhost:3000/authenticate', user, {headers:headers}).map(res=>res.json());  	
   }
+
+  getProfile(){
+    var headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken)
+    headers.append('Content-Type', 'application/json')
+    // console.log(user)
+    return this.http.get('http://localhost:3000/profile', {headers:headers}).map(res=>res.json());  
+  }
+
   storeUserData(token, user){
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user.username));
@@ -33,5 +43,10 @@ export class AuthService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+  }
+
+  loadToken(){
+    const token = localStorage.getItem('id_token')
+    this.authToken = token
   }
 }
