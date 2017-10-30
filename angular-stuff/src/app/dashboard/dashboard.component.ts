@@ -10,6 +10,8 @@ import  {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+	allUsers: Object;
+
   constructor(
   	private fetchdataService:FetchdataService,
   	private router: Router
@@ -17,7 +19,19 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-
+  	this.fetchdataService.getAllProfile().subscribe(users=>{
+  		// for(let user of users.users)
+  		this.allUsers = users.user
+  		console.log(users.user)
+  	}, 
+  	err=>{
+  		console.log(err);
+  		return false
+  	})
   }
+
+  // contactArtist(){
+  	
+  // }
 
 }
