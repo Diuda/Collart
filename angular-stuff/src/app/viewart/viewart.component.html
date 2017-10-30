@@ -1,0 +1,39 @@
+<!-- <div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button">Go!</button>
+      </span>
+      <input #searchBox type="text" class="form-control" placeholder="Search for..." (keyup)="search(searchBox.value)" >
+    </div>
+  </div>
+</div>
+<br><br> -->
+<div *ngFor="let art of allArt">
+
+	<div class="list-group">
+  <a [routerLink]="['/profile', art.username]" class="list-group-item active">{{art.username}}</a>
+  <a class="list-group-item list-group-item-action">{{art.title}}</a>
+  <a href="#" class="list-group-item list-group-item-action">{{art.description}}</a>
+  <a href="#" class="list-group-item list-group-item-action">{{art.type}}</a>
+  <!-- <a href="#" class="list-group-item list-group-item-action">{{art.type}}</a> -->
+</div>
+  <iframe height="450" width="100%" [src]=sanitizer.bypassSecurityTrustResourceUrl(art.link) frameborder="0" allowfullscreen></iframe>
+
+  <!-- <p>{{art.username}}</p> -->
+<br><br>
+  <div class="row">
+  <div class="col-lg-offset-3 col-lg-6">
+    <div class="input-group">
+      <input #likes value={{art.like}}  class="col-sm-2 col-form-label" disabled>
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" aria-hidden="true" type="button" (click)="likeCounter(art.title, likes.value)">Like It</button>
+        <!-- <i class="fa fa-thumbs-up" aria-hidden="true"></i> -->
+
+      </span>
+    </div>
+  </div>
+</div>
+<br><br><br>
+
+</div>
