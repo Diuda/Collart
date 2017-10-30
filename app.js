@@ -15,6 +15,8 @@ var register = require('./routes/register');
 var profile = require('./routes/profile');
 var config = require('./config/database');
 var User = require('./models/register');
+var Art = require('./models/art')
+var Prof = require('./models/profile')
 
 var app = express();
 
@@ -49,7 +51,7 @@ require('./config/passport')(passport);
 
 
 app.use('/', index);
-app.use('/users', users);
+// app.use('/users', users);
 app.post('/register', register.register)
 
 app.post('/authenticate', (req, res, next)=>{
@@ -89,6 +91,81 @@ app.post('/authenticate', (req, res, next)=>{
 
 
 app.get('/profile', passport.authenticate('jwt', {session:false}), profile.info)
+
+app.get('/users', users.allUsers)
+
+
+app.param('name', (req,res,next,name)=>{
+	// console.log(name)
+	Prof.getProfileByUsername(name, (err, prof)=>{
+		if(err)
+			res.json({success:false, status:132, msg:'database error'})
+		else if(prof.length>0){
+			console.log(prof)
+			req.profile = prof
+			next();
+		}
+		else{
+			res.json({success:false, status:133, msg:'user not found'})
+		}
+	})
+})
+
+
+app.get('/profile/:name', (req,res)=>{
+	console.log(req.params.name)
+	res.json(req.profile)
+})
+
+
+app.post('/art', (req, res)=>{
+
+	const newArt = new Art({
+		title: req.body.title,
+		username: req.body.username,
+		link: req.body.link,
+		description: req.body.desc,
+		type: req.body.type
+	})
+
+	Art.addArt(newArt, (err, art)=>{
+		if(err)
+			res.json({success: false, status:132, msg:'cannot add art'})
+		else
+			res.json({success: true, status:200, msg:'art added'})
+	})
+
+})
+
+app.get('/art', (req, res)=>{
+	Art.allArt((err, art)=>{
+		console.log(art)
+		res.json({art})
+	})
+})
+
+app.post('/likes', (req, res)=>{
+	const like = {
+		"title": req.body.title,
+		"likes": req.body.likes
+	}
+	Art.updateLikes(like, (err, art)=>{
+		// art[0].like = parseInt(like.likes)
+		// console.log(like)
+		console.log(art)
+
+		// Art.addArt(art, (err, art)=>{
+			if(err){
+				console.log(err)
+				res.json({success: false, status:132, msg:'cannot add art'})
+			}
+			else
+				res.json(art)
+		// })
+	})
+})
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
