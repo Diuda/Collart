@@ -15,3 +15,12 @@ var Schema = mongoose.Schema;
  var Profile = mongoose.model('Profile', profileSchema);
 
  module.exports = Profile;
+
+ module.exports.getAllProfile = (callback)=>{
+ 	Profile.find({}, callback)
+ }
+
+
+ module.exports.getProfileByUsername = (user, callback)=>{
+ 	Profile.find({username:user}, callback)
+ }
