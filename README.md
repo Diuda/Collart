@@ -1,2 +1,2 @@
 # Collart
-A platform for upcoming artists and fuckbois
+A platform for upcoming artists
