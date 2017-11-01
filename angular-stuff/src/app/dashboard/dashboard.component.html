@@ -1,10 +1,10 @@
 <div class="card-deck">
   <div class="card" *ngFor="let user of allUsers">
-    <img class="card-img-top" src="..." alt="Card image cap">
+    <img class="card-img-top" src="https://static.skillshare.com/uploads/project/bb0ba6bf0db11ab4b8af9569cbe55f55/ded1339e" alt="Card image cap">
     <div class="card-block">
-      <h4 class="card-title">{{user.name}}</h4>
-      <p class="card-text">Email id of {{user.name}} is {{user.email}} and the username is {{user.username}} and you can contact him on {{user.contact}}</p>
-      <a class="btn btn-primary">Contact This Artist</a><br><br>
+      <a  [routerLink]="['/profile', user.username]"><h2 class="card-title">{{user.name}}</h2></a>
+      <!-- <p class="card-text">Email id of {{user.name}} is {{user.email}} and the username is {{user.username}} and you can contact him on {{user.contact}}</p> -->
+      <a class="btn btn-primary" [routerLink]="['/contactartist', user.email]">Contact This Artist</a><br><br>
     </div>
     <div class="card-footer">
       <small class="text-muted">Last updated 3 mins ago</small>
