@@ -17,7 +17,8 @@ var config = require('./config/database');
 var User = require('./models/register');
 var Art = require('./models/art')
 var Prof = require('./models/profile')
-
+var mail = require('./routes/mail')
+ 
 var app = express();
 
 app.use(cors())
@@ -164,6 +165,64 @@ app.post('/likes', (req, res)=>{
 		// })
 	})
 })
+
+app.post('/saveProfile', (req, res)=>{
+	const newProf = new Prof({
+		name: req.body.name,
+		username: req.body.username,
+		type: req.body.type,
+		experience: req.body.experience,
+		profession: req.body.profession,
+		city: req.body.city
+	})
+	console.log(newProf)
+	Prof.addProfile(newProf, (err)=>{
+		// console.log(prof)
+		if(err){
+			console.log(err)
+			res.json({success: false, status:132, msg:'cannot add art'})
+		}else
+			res.json({success: true, status:200, msg:'art added'})
+
+	})
+})
+
+
+app.use('/myart', (req, res)=>{
+	console.log(req.param('user'))
+	Art.findMyArt(req.param('user'), (err, art)=>{
+		if(err)
+			res.json({success:false, status:134, msg:'cannot retrieve art'})
+		else
+			res.json(art)
+	})
+})
+
+
+app.post('/delArt', (req, res)=>{
+	Art.delArt(req.body.title, (err)=>{
+		if(err)
+			res.json({success:false, status:134, msg:'cannot retrieve art'})
+		else
+			res.json({success:true, status:200, msg:'art deleted'})		
+	})
+})
+
+app.post('/pro', (req,res)=>{
+	Prof.getProfileByUsername(req.body.username, (err, prof)=>{
+		console.log(prof)
+			if(err)
+				res.json({success:false, status:132, msg:'database error'})
+			else if(prof.length>0){
+				res.json(prof)
+			}
+			else{
+				res.json({success:false, status:133, msg:'user not found'})
+			}
+		})
+})
+
+// app.post('/mail', mail.perform)
 
 
 // catch 404 and forward to error handler
