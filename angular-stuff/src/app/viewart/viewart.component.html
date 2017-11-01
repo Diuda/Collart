@@ -1,31 +1,23 @@
-<!-- <div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button">Go!</button>
-      </span>
-      <input #searchBox type="text" class="form-control" placeholder="Search for..." (keyup)="search(searchBox.value)" >
-    </div>
-  </div>
-</div>
-<br><br> -->
+
 <div *ngFor="let art of allArt">
 
 	<div class="list-group">
-  <a [routerLink]="['/profile', art.username]" class="list-group-item active">{{art.username}}</a>
-  <a class="list-group-item list-group-item-action">{{art.title}}</a>
-  <a href="#" class="list-group-item list-group-item-action">{{art.description}}</a>
-  <a href="#" class="list-group-item list-group-item-action">{{art.type}}</a>
-  <!-- <a href="#" class="list-group-item list-group-item-action">{{art.type}}</a> -->
-</div>
-  <iframe height="450" width="100%" [src]=sanitizer.bypassSecurityTrustResourceUrl(art.link) frameborder="0" allowfullscreen></iframe>
-
-  <!-- <p>{{art.username}}</p> -->
+  <a class="list-group-item list-group-item-action"><h2>{{art.title}}</h2></a>
+</div><br><br>
+  <iframe style="display: block; margin: 0 auto;" height="400" width="75%" [src]=sanitizer.bypassSecurityTrustResourceUrl(art.link) frameborder="0" allowfullscreen></iframe><br><br>
+  <h2><b>Uploaded By:</b></h2><br>
+  <a [routerLink]="['/profile', art.username]" class="list-group-item"><h3>{{art.username}}</h3></a>
+  <br><br>
+  <h2><b>Description:</b></h2><br>
+  <a href="#" class="list-group-item list-group-item-action"><h3>{{art.description}}</h3></a>
+  <br><br>
+  <h3><b>Genre:</b></h3><br>
+  <a href="#" class="list-group-item list-group-item-action"><h4>{{art.type}}</h4></a>
 <br><br>
   <div class="row">
   <div class="col-lg-offset-3 col-lg-6">
     <div class="input-group">
-      <input #likes value={{art.like}}  class="col-sm-2 col-form-label" disabled>
+      <input #likes value="{{art.like}} likes"  class="col-sm-2 col-form-label" disabled>
       <span class="input-group-btn">
         <button class="btn btn-secondary" aria-hidden="true" type="button" (click)="likeCounter(art.title, likes.value)">Like It</button>
         <!-- <i class="fa fa-thumbs-up" aria-hidden="true"></i> -->
