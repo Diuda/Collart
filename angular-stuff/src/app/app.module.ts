@@ -23,6 +23,9 @@ import { UploadComponent } from './upload/upload.component';
 import { ViewartComponent } from './viewart/viewart.component';
 import { PostartComponent } from './postart/postart.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
+import { ContactartistComponent } from './contactartist/contactartist.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
+import { MyartComponent } from './myart/myart.component';
 // import {FlashMessageModule} from 'angular2-flash-message';
 
 const appRoutes: Routes = [
@@ -34,6 +37,9 @@ const appRoutes: Routes = [
   {path:'postart', component:PostartComponent},
   {path:'viewart', component:ViewartComponent},
    {path:'profile/:name', component:UserinfoComponent},
+  {path:'contactartist/:artist', component:ContactartistComponent},
+  {path:'editprofile', component:EditprofileComponent},
+  {path:'myart', component:MyartComponent},
 ] 
 
 @NgModule({
@@ -49,6 +55,9 @@ const appRoutes: Routes = [
     ViewartComponent,
     PostartComponent,
     UserinfoComponent,
+    ContactartistComponent,
+    EditprofileComponent,
+    MyartComponent,
 
   ],
   imports: [
