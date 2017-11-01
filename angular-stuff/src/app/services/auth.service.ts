@@ -84,6 +84,55 @@ export class AuthService {
   // console.log(user)
   return this.http.post('http://localhost:3000/likes', like, {headers:headers}).map(res=>res.json());  
   }
+
+  mailArtist(cont){
+  var headers = new Headers();
+  this.loadToken();
+  // headers.append('Authorization', this.authToken)
+  headers.append('Content-Type', 'application/json')
+  // console.log(user)
+  return this.http.post('http://34.215.21.3:4567/collart', cont, {headers:headers}).map(res=>res.json());   
+  }
+
+
+  saveProfile(updateUser){
+   var headers = new Headers();
+  this.loadToken();
+  // headers.append('Authorization', this.authToken)
+  headers.append('Content-Type', 'application/json')
+  // console.log(user)
+  return this.http.post('http://localhost:3000/saveProfile', updateUser, {headers:headers}).map(res=>res.json());   
+  }
+
+  myArt(){
+    this.loadUsername();
+  var headers = new Headers();
+  this.loadToken();
+  // headers.append('Authorization', this.authToken)
+  headers.append('Content-Type', 'application/json')
+  // console.log(user)
+  return this.http.get('http://localhost:3000/myart' , {headers:headers, params:{user:this.user}}).map(res=>res.json());
+
+  }
+
+
+  deleteArt(video){
+  var headers = new Headers();
+  this.loadToken();
+  // headers.append('Authorization', this.authToken)
+  headers.append('Content-Type', 'application/json')
+  // console.log(user)
+  return this.http.post('http://localhost:3000/delArt' , video ,{headers:headers}).map(res=>res.json());    
+  }
+
+  details(user){
+   var headers = new Headers();
+  this.loadToken();
+  // headers.append('Authorization', this.authToken)
+  headers.append('Content-Type', 'application/json')
+  // console.log(user)
+  return this.http.post('http://localhost:3000/pro' , user,{headers:headers}).map(res=>res.json());     
+  }
 }
 
 
