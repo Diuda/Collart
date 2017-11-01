@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   		if(data.success){
         this.AuthService.storeUserData(data.token, data.user)
-        this.router.navigate(['/profile'])
+        this.router.navigate(['/editprofile'])
   			console.log(data)
   		}
   		else{
