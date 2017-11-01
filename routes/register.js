@@ -23,6 +23,8 @@ router.register = (req,res)=>{
 			res.json({success: true, status:200, msg:'user registered'})
 	})
 
+	
+
 
 }
 
