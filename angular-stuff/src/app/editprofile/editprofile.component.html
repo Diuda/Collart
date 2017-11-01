@@ -1,0 +1,28 @@
+<form >
+  <div class="form-group">
+    <label for="formGroupExampleInput">Username</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" #username>
+  </div>
+   <div class="form-group">
+    <label for="formGroupExampleInput">Name</label>
+    <input #name type="text" class="form-control" id="formGroupExampleInput"  >
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Type</label>
+    <input #type type="text" class="form-control" id="formGroupExampleInput2" >
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Experience</label>
+    <input #exp type="text" class="form-control" id="formGroupExampleInput2" >
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Profession</label>
+    <input #profess type="text" class="form-control" id="formGroupExampleInput2"  >
+  </div> 
+  <div class="form-group">
+    <label for="formGroupExampleInput2">City</label>
+    <input #city type="text" class="form-control" id="formGroupExampleInput2"  >
+  </div>
+
+    <button type="submit" class="btn btn-primary" (click)="editProfile(username.value, name.value, type.value, exp.value, profess.value, city.value)">Submit</button>
+</form>
