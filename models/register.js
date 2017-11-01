@@ -40,3 +40,8 @@ module.exports.comparePassword = (curPass, actPass, callback)=>{
     		callback(null, res);
 	});
 }
+
+
+ module.exports.getAllProfile = (callback)=>{
+    User.find({}, callback)
+ }

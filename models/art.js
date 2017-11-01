@@ -37,3 +37,17 @@ module.exports.updateLikes = (likes, callback)=>{
 		updateArt.save(callback)
 	})
 }
+
+
+module.exports.findMyArt = (user, callback)=>{
+	Art.find({username: user}, callback)
+}
+
+
+module.exports.delArt = (title, callback)=>{
+	Art.find({title:title}, function(err, art){
+		console.log(art[0])
+		if (err) throw err;
+		art[0].remove(callback)
+	})
+}

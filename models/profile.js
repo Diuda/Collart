@@ -16,6 +16,11 @@ var Schema = mongoose.Schema;
 
  module.exports = Profile;
 
+
+ module.exports.addProfile = (newProf, callback)=>{
+ 	newProf.save(callback)
+ }
+
  module.exports.getAllProfile = (callback)=>{
  	Profile.find({}, callback)
  }
