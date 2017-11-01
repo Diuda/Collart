@@ -1,0 +1,20 @@
+<h2><b>My Uploads</b></h2>
+<br><br>
+
+<div *ngFor="let art of allMyArt">
+
+	<div class="list-group">
+  <a class="list-group-item list-group-item-action"><h2>{{art.title}}</h2></a>
+</div>
+<br>
+  <iframe style="display: block; margin: 0 auto;" height="400" width="60%" [src]=sanitizer.bypassSecurityTrustResourceUrl(art.link) frameborder="0" allowfullscreen></iframe>
+  <br><br>
+  <h2><b>Description:</b></h2><br>
+  <a href="#" class="list-group-item list-group-item-action"><h3>{{art.description}}</h3></a>
+  <br><br>
+  <h3><b>Genre:</b></h3><br>
+  <a href="#" class="list-group-item list-group-item-action"><h4>{{art.type}}</h4></a>
+<br><br>
+
+<button type="button" class="btn btn-danger" (click)="deleteContent(art.title)">Delete This Video</button>
+ </div>
